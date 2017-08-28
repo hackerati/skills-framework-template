@@ -3,7 +3,7 @@
 clean:
 	rm -rf dist/ node_modules/
 
-install: clean
+install:
 	npm install
 
 test: install
@@ -13,4 +13,8 @@ deploy: test clean
 	npm install --production
 	terraform init -force-copy -input=false
 	terraform plan
-	terraform apply
+	ls -lah
+	ls -lah dist/
+	-terraform apply
+	ls -lah
+	ls -lah dist/
