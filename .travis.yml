@@ -20,8 +20,9 @@ script:
 before_deploy:
   - terraform_url=$(curl https://releases.hashicorp.com/index.json | jq '{terraform}' | egrep "linux.*amd64" | sort --version-sort -r | head -1 | awk -F[\"] '{print $4}')
   - curl -o terraform.zip $terraform_url
-  - unzip terraform.zip && rm terraform.zip
-  - mv terraform /usr/bin
+  - sudo unzip terraform.zip -d /opt/terraform
+  - sudo ln -s /opt/terraform/terraform /usr/bin/terraform
+  - rm -f terraform.zip
 
 deploy:
   provider: script
