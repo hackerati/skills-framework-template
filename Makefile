@@ -1,11 +1,15 @@
-.PHONY: install test deploy
+.PHONY: clean install test deploy
 
-install:
+clean:
+	rm -rf dist/ node_modules/
+
+install: clean
 	npm install
 
 test: install
 	npm test
 
-deploy: test
-	terraform init -force-copy -input=false
-	terraform apply
+deploy: test clean
+	npm install --production
+	../terraform init -force-copy -input=false
+	../terraform plan
