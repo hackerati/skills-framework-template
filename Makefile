@@ -11,5 +11,6 @@ test: install
 
 deploy: test clean
 	npm install --production
-	../terraform init -force-copy -input=false
-	../terraform plan
+	terraform init -force-copy -input=false
+	terraform plan
+	terraform apply
