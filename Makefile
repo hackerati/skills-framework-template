@@ -1,3 +1,8 @@
+.PHONY: test deploy
+
+test:
+	npm test
+
 deploy:
-	terraform plan
+	terraform init -force-copy -input=false
 	terraform apply
