@@ -1,0 +1,30 @@
+language: node_js
+
+node_js:
+  - 7.4.0
+
+branches:
+  only:
+    - master
+
+env:
+  global:
+    - secure: WmUwKc8kIqC47FMiczXJkwEK5nx6nDgM/ikKjskADsadVh8VTpAMU9Uycq5Gm2CyZtGvcnbAqoBourVFHQx2vH4Bwpq19WAv8HBC9qJAeXMMb22E1UG8Qdy7y7Ur2F3AIfZHbTx7v/XMeSuJ2YVf7nosjfCLJxpcyex5Rv7aJBVggKDOUoTXw197fUDvJsaOrW8i+UHrSfEZVxXNxGjsec+PWh08PWtff7zLdTpfjSjjW3lfqKtsjxxjcMRJCC44rLvnZejVIRRXNFHjq9+7IZGBdJMvNj013cJ/u5vmSz+o1DQ6pFpggSPWomsgX0Xi1sxnTl/QBbBIkL1G9EhclA==
+
+install:
+  - npm install
+
+script:
+  - npm run build
+
+before_deploy:
+  - terraform_url=$(curl https://releases.hashicorp.com/index.json | jq '{terraform}' | egrep "linux.*amd64" | sort --version-sort -r | head -1 | awk -F[\"] '{print $4}')
+  - curl -o terraform.zip $terraform_url
+  - unzip terraform.zip && rm terraform.zip
+  - mv terraform /usr/bin
+
+deploy:
+  provider: script
+  script: ./deploy.sh
+  on:
+    branch: master
