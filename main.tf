@@ -1,9 +1,3 @@
-data "archive_file" "lambda_zip" {
-  type        = "zip"
-  source_dir  = "${path.module}/"
-  output_path = "${path.module}/dist/skills-framework-test.zip"
-}
-
 terraform {
   backend "s3" {
     bucket = "hackerati-terraform-backends"
@@ -14,6 +8,12 @@ terraform {
 
 provider "aws" {
   region = "us-east-1"
+}
+
+data "archive_file" "lambda_zip" {
+  type        = "zip"
+  source_dir  = "${path.module}/"
+  output_path = "${path.module}/dist/skills-framework-test.zip"
 }
 
 resource "aws_iam_role" "skills-framework-test" {

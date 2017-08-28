@@ -1,8 +1,11 @@
-.PHONY: test deploy
+.PHONY: install test deploy
 
-test:
+install:
+	npm install
+
+test: install
 	npm test
 
-deploy:
+deploy: test
 	terraform init -force-copy -input=false
 	terraform apply

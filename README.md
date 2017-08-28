@@ -3,8 +3,6 @@
 ## Local Setup
 
 - Install terraform
-- `npm install`
-- `make test`
 - `make deploy`
 
 ## Run lambda locally
