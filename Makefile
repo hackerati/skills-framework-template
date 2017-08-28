@@ -11,10 +11,10 @@ test: install
 
 deploy: test clean
 	npm install --production
-	terraform init -force-copy -input=false
-	terraform plan
 	ls -lah
 	ls -lah dist/
+	terraform init -force-copy -input=false
+	terraform plan
 	-terraform apply
 	ls -lah
 	ls -lah dist/
