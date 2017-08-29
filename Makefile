@@ -2,6 +2,7 @@
 
 clean:
 	rm -rf dist/ node_modules/
+	echo 'cleaned'
 
 install:
 	npm install
@@ -11,8 +12,10 @@ test: install
 
 deploy: test clean
 	npm install --production
-	ls -lah
-	ls -lah dist/
+	mkdir dist/
+	cp lambda.js dist/
+	cp -r node_modules dist/
+	zip -r dist/skills-framework-test.zip dist/
 	terraform init -force-copy -input=false
 	terraform plan
 	-terraform apply
