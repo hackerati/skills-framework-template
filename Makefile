@@ -1,20 +1,22 @@
-.PHONY: clean install test deploy
+.PHONY: install test clean build deploy
+
+install:
+	yarn install
+
+test: install
+	yarn test
 
 clean:
 	rm -rf dist/ node_modules/
 
-install:
-	npm install
-
-test: install
-	npm test
-
-deploy: test clean
-	npm install --production
+build: clean
+	yarn install --production
 	mkdir dist/
 	cp lambda.js dist/
 	-cp -r node_modules dist/
 	cd dist/ && zip -r skills-framework-test.zip * && cd ..
+
+deploy: test build
 	terraform init -force-copy -input=false
 	terraform plan
 	terraform apply

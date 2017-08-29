@@ -2,7 +2,7 @@
 
 ## Local Setup
 
-- Install terraform
+- devDependencies: yarn, terraform
 - `make deploy`
 
 ## Run lambda locally
