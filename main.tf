@@ -36,6 +36,6 @@ resource "aws_lambda_function" "skills-framework-test" {
   function_name    = "skills-framework-test"
   role             = "${aws_iam_role.skills-framework-test.arn}"
   handler          = "lambda.handler"
-  source_code_hash = "${base64sha256(file("dist/skills-framework-test.zip"))}"
+  source_code_hash = "${base64sha256(file("${path.module}/dist/skills-framework-test.zip"))}"
   runtime          = "nodejs6.10"
 }

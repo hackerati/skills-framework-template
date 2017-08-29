@@ -14,9 +14,7 @@ deploy: test clean
 	mkdir dist/
 	cp lambda.js dist/
 	-cp -r node_modules dist/
-	cd dist/
-	zip -r skills-framework-test.zip *
-	cd ..
+	cd dist/ && zip -r skills-framework-test.zip * && cd ..
 	terraform init -force-copy -input=false
 	terraform plan
 	terraform apply
