@@ -19,6 +19,7 @@
   "homepage": "https://github.com/hackerati/skills-framework-test#readme",
   "devDependencies": {
     "lambda-local": "^1.4.2",
-    "mocha": "^3.5.0"
+    "mocha": "^3.5.0",
+    "sinon": "^3.2.1"
   }
 }
