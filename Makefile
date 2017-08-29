@@ -11,11 +11,12 @@ test: install
 
 deploy: test clean
 	npm install --production
-	ls -lah node_modules/
 	mkdir dist/
 	cp lambda.js dist/
-	cp -r node_modules dist/
-	zip -r dist/skills-framework-test.zip dist/
+	-cp -r node_modules dist/
+	pushd dist/
+	zip -r skills-framework-test.zip *
+	popd
 	terraform init -force-copy -input=false
 	terraform plan
 	terraform apply
