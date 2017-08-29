@@ -2,7 +2,6 @@
 
 clean:
 	rm -rf dist/ node_modules/
-	echo 'cleaned'
 
 install:
 	npm install
@@ -18,6 +17,4 @@ deploy: test clean
 	zip -r dist/skills-framework-test.zip dist/
 	terraform init -force-copy -input=false
 	terraform plan
-	-terraform apply
-	ls -lah
-	ls -lah dist/
+	terraform apply
